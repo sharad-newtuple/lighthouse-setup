@@ -44,6 +44,22 @@ jobs:
             ls -la my-app/
           fi
         
+      - name: Debug before upload
+        if: always()
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents of current directory:"
+          ls -la
+          echo "Checking if my-app/.lighthouseci exists:"
+          if [ -d "my-app/.lighthouseci" ]; then
+            echo "✅ my-app/.lighthouseci exists"
+            echo "Contents:"
+            ls -la my-app/.lighthouseci/
+          else
+            echo "❌ my-app/.lighthouseci does not exist"
+          fi
+          
       - name: Upload Lighthouse results
         if: always()
         uses: actions/upload-artifact@v4
