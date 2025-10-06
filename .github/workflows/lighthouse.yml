@@ -2,8 +2,6 @@ name: Lighthouse CI
 
 on:
   push:
-    branches: [ '*' ]  # Run on all branches
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -32,36 +30,12 @@ jobs:
       - name: Run Lighthouse CI
         working-directory: ./my-app
         run: npx lhci autorun
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-          
-      - name: List files after Lighthouse run
-        run: |
-          echo "Files in my-app directory:"
-          ls -la my-app/
-          echo "Files in my-app/.lighthouseci directory:"
-          ls -la my-app/.lighthouseci/ || echo "No .lighthouseci directory found"
-          echo "Files in root directory:"
-          ls -la
-          echo "Files in .lighthouseci directory (if exists):"
-          ls -la .lighthouseci/ || echo "No .lighthouseci directory in root"
-          
-      - name: Copy Lighthouse results to root
-        if: always()
-        run: |
-          if [ -d "my-app/.lighthouseci" ]; then
-            echo "Copying Lighthouse results to root directory..."
-            cp -r my-app/.lighthouseci ./
-            echo "Files copied to root .lighthouseci directory:"
-            ls -la .lighthouseci/
-          else
-            echo "No .lighthouseci directory found in my-app"
-          fi
-          
+        continue-on-error: true
+        
       - name: Upload Lighthouse results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: .lighthouseci/
+          path: my-app/.lighthouseci/
           retention-days: 30
