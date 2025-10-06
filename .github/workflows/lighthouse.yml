@@ -44,8 +44,9 @@ jobs:
           
       - name: Upload Lighthouse results
         if: always()
+        working-directory: ./my-app
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: my-app/.lighthouseci/
+          path: .lighthouseci/
           retention-days: 30
