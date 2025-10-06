@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Lighthouse CI - Allow artifacts to be uploaded
+# .lighthouseci/
