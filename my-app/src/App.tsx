@@ -4,8 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 // Import heavy libraries to increase bundle size
-import * as _ from 'lodash'
-import moment from 'moment'
+
 
 // Heavy computation function to slow down the app
 function heavyComputation() {
