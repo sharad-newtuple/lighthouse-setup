@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-# Lighthouse CI
-.lighthouseci/
+# Lighthouse CI - Allow artifacts to be uploaded
+# .lighthouseci/
 
 # Editor directories and files
 .vscode/*
