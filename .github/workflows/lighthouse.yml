@@ -32,6 +32,18 @@ jobs:
         run: npx lhci autorun
         continue-on-error: true
         
+      - name: Check if Lighthouse files exist
+        run: |
+          echo "Checking for Lighthouse files..."
+          if [ -d "my-app/.lighthouseci" ]; then
+            echo "✅ .lighthouseci directory exists"
+            ls -la my-app/.lighthouseci/
+          else
+            echo "❌ .lighthouseci directory does not exist"
+            echo "Contents of my-app directory:"
+            ls -la my-app/
+          fi
+        
       - name: Upload Lighthouse results
         if: always()
         uses: actions/upload-artifact@v4
