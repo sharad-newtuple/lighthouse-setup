@@ -35,6 +35,13 @@ jobs:
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           
+      - name: List files after Lighthouse run
+        run: |
+          echo "Files in my-app directory:"
+          ls -la my-app/
+          echo "Files in my-app/.lighthouseci directory:"
+          ls -la my-app/.lighthouseci/ || echo "No .lighthouseci directory found"
+          
       - name: Upload Lighthouse results
         if: always()
         uses: actions/upload-artifact@v4
